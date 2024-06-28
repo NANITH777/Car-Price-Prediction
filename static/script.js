@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
             )}`;
           } else {
             document.getElementById("prediction-result").innerHTML =
-              "Prediction failed. Please try again.";
+              "Enter valid informations. Prediction failed. Please try again.";
           }
         }
       };
