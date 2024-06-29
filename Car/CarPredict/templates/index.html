@@ -4,16 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Car Price Prediction</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}"
-    />
-    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <link rel="stylesheet" href="{% static 'predict.css' %}" />
   </head>
   <body>
     <div class="container">
       <h1>Car Price Prediction</h1>
-      <form id="prediction-form">
+      <form id="prediction-form" method="post" action="{% url 'predict' %}">
+        {% csrf_token %}
         <label for="year">Year of Manufacture:</label>
         <input
           type="number"
@@ -85,22 +84,64 @@
           <option value="{{ brand }}">{{ brand }}</option>
           {% endfor %}
         </select>
-
         <div class="buttons">
-          <button type="button" id="predict-btn">Predict Price</button>
+          <button type="submit">Predict</button>
           <button type="reset" id="reset-btn">Reset</button>
         </div>
-      </form>
-      <div id="prediction-result"></div>
 
+        <div id="result"></div>
+      </form>
       <footer>
         <p>&copy; Nanith💻 2024 Car Price Prediction. All rights reserved.</p>
         <p>
-          Contact:
-          <a href="mailto:info@mycarprice.com">info@mycarprice.com</a>
+          Contact: <a href="mailto:info@mycarprice.com">info@mycarprice.com</a>
         </p>
         <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
       </footer>
     </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        document
+          .getElementById("prediction-form")
+          .addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            var fd = new FormData(document.querySelector("#prediction-form"));
+
+            fetch("{% url 'predict' %}", {
+              method: "POST",
+              body: fd,
+              headers: {
+                "X-CSRFToken": "{{ csrf_token }}",
+              },
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                if ("price" in data) {
+                  document.getElementById(
+                    "result"
+                  ).innerHTML = `<div id="result-message">Based on the provided information, the predicted price is: 💰 $ ${data.price.toFixed(
+                    2
+                  )}</div>`;
+                } else {
+                  document.getElementById("result").textContent =
+                    "Enter valid information. Prediction failed. Please try again.";
+                }
+              })
+              .catch((error) => {
+                console.error("Error during prediction:", error);
+                document.getElementById("result").textContent =
+                  "Enter valid information. Prediction failed. Please try again.";
+              });
+          });
+
+        document
+          .getElementById("reset-btn")
+          .addEventListener("click", function () {
+            document.getElementById("result").textContent = "";
+            document.getElementById("prediction-form").reset();
+          });
+      });
+    </script>
   </body>
 </html>

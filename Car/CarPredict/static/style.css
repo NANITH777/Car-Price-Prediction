@@ -80,14 +80,6 @@ button:hover {
   opacity: 0.8;
 }
 
-#prediction-result {
-  margin-top: 20px;
-  text-align: center;
-  font-size: 1.2em;
-  color: green;
-  word-wrap: break-word;
-}
-
 footer {
   background-color: #f1f1f1;
   padding: 10px;
@@ -96,7 +88,7 @@ footer {
   color: #333;
   border-top: 1px solid #e1e1e1;
   margin-top: 20px;
-  width: 100%; /* Ensure the footer matches the container width */
+  width: 100%;
   box-sizing: border-box;
 }
 
