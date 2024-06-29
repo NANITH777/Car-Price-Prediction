@@ -1,3 +1,2 @@
 Django==3.2.4             # Web framework for backend development
-pandas==2.3.0              # Data manipulation library
-scikit-learn==1.3.0      # Machine learning library
+pandas==1.3.2              # Data manipulation library
