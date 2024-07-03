@@ -4,6 +4,9 @@
 
 This project employs multiple advanced regression models to predict car prices based on a variety of attributes, including the year of manufacture, mileage, fuel type, engine size, maximum power, and more. The primary objective is to create a robust and accurate prediction system that can assist users in estimating the fair market value of a car. The application is deployed using Django, ensuring a seamless integration of the model with a user-friendly web interface.
 
+<img width="946" alt="pred" src="https://github.com/NANITH777/Car-Price-Prediction/assets/109669139/cb6537a0-93f1-42ca-a5fc-d80b26df48cf">
+<img width="948" alt="pred2" src="https://github.com/NANITH777/Car-Price-Prediction/assets/109669139/1b09d6cd-6512-4a03-a5bd-7e17ba8e671b">
+
 **Data Handling and Preparation:**
 
 - **Data Collection:** The dataset comprises information on various car attributes, collected from reliable sources.
